@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(event) { 
     // check for https
-    if (location.protocol !== 'https:') {
+    if((location.protocol !== 'https:') && (location.protocol !== 'file:')) {
         console.error("Coping to the clipboard may not work on non-https sites.");
     }
     
@@ -38,7 +38,29 @@ document.addEventListener("DOMContentLoaded", function(event) {
             copy_helper.value = data_source_element.innerText;
         }
         else {
-            copy_helper.value = this.parentNode.innerText;
+            // get childs of parent
+            let parent_childs = this.parentNode.childNodes;
+            let output = "";
+            
+            // iter all childs of parent
+            for(let i = 0; i < parent_childs.length; i++) {
+                if(parent_childs[i] === this) { // skip the copy element
+                    continue;
+                }
+                else {
+                    if(output.length > 0) { // concat with spaces inbetween 
+                        output += " ";
+                    }
+                    if (parent_childs[i].nodeType === 3) { // handle text elements
+                        output += parent_childs[i].textContent.trim();
+                    }
+                    else { // handle html elements
+                        output += parent_childs[i].innerText.trim();
+                    }
+                }
+            }
+            
+            copy_helper.value = output.trim();
         }
         
         copy_helper.select();
