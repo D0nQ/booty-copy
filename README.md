@@ -11,7 +11,7 @@ If you do not specify a target the text of the parent dom element will be copied
 
 Booty-copy also works with optionally added elements.
 
-Demo: https://htmlpreview.github.io/?https://github.com/D0nQ/booty-copy/blob/master/demo.html
+Demo: https://htmlpreview.github.io/?https://github.com/D0nQi/booty-copy/blob/master/demo.html
 
 ### Copy the text of a html element by defining a target
 ```HTML
